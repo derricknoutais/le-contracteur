@@ -39,11 +39,11 @@
                     @endif
                     <div class="form-group col-md-6" >
                         <label for="date_retour_prevue">Date de Retour<span class="required">*</span></label>
-                        <input id="date_retour_prevue" type="date" name="date_retour_prevue" class="form-control" spellcheck="false" required value="{{ ($contrat->date_retour_prevue)->format('Y-m-d') }}" />
+                        <input id="date_retour_prevue" type="date" name="date_retour_prevue" class="form-control" spellcheck="false" required value="" />
                     </div>
                     <div class="form-group col-md-6" >
                         <label for="caution">Caution<span class="required">*</span></label>
-                        <input id="caution" type="number" name="caution" class="form-control" spellcheck="false" required value="{{ $contrat->caution }}" />
+                        <input id="caution" type="number" name="caution" class="form-control" spellcheck="false" required value="" />
                     </div>
 
                     <div class="form-group" >

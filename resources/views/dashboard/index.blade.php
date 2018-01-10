@@ -6,7 +6,7 @@
 <div class="row text-center">
     <h1>Dashboard</h1>
 </div>
-<div class="row">
+{{-- <div class="row">
     <div class="col-lg-2 col-md-2 col-sm-3">
         <div class="card card-stats">
             <div class="card-header" data-background-color="orange">
@@ -121,17 +121,23 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
 <div class="row" style="margin: 2em;">
     <div class="col-md-4">
     {!! $locationJournaliere->html() !!}
+    </div>
+    <div class="col-md-4">
+        {!! $tauxLocation->html() !!}
+    </div>
+    <div class="col-md-4">
+        {!! $locationMensuelle->html() !!}
+    </div>
 </div>
-<div class="col-md-4">
-    {!! $tauxLocation->html() !!}
-</div>
-<div class="col-md-4">
-    {!! $locationMensuelle->html() !!}
-</div>
+<div class="row" style="margin: 2em;">
+    <div class="col-md-4">
+    {!! $payementMensuel->html() !!}
+    </div>
 </div>
 
 
@@ -142,4 +148,5 @@
 {!! $tauxLocation->script() !!}
 {!! $locationMensuelle->script() !!}
 {!! $locationJournaliere->script() !!}
+{!! $payementMensuel->script() !!}
 @endsection

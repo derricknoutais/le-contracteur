@@ -26,8 +26,6 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 $factory->define(App\Voiture::class, function (Faker $faker) {
-    static $password;
-
     return [
         'immatriculation' => strtoupper($faker->bothify('??-###-??')),
         "marque" => $faker->randomElement($array = array ('Toyota')),
@@ -49,8 +47,6 @@ $factory->define(App\Voiture::class, function (Faker $faker) {
     ];
 });
 $factory->define(App\Client::class, function (Faker $faker) {
-
-
     return [
         'nom' => $faker->lastname() ,
         'prenom' => $faker->lastname(),

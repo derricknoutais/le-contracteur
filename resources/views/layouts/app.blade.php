@@ -20,7 +20,7 @@
     <link href="{{ asset('css/panel.css') }}" rel="stylesheet">
     {!! Charts::assets() !!}
 </head>
-<body>
+<body class="bg-info">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -82,7 +82,7 @@
                                         </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ route('clients.index') }}"><i class="fa fa-users" aria-hidden="true"></i> Tous les Clients</a></li>
-                                    <li><a href="{{ route('clients.index') }}"><i class="fa fa-plus" aria-hidden="true"></i> Créer Nouveau Client</a></li>
+                                    <li><a href="{{ route('clients.create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Créer Nouveau Client</a></li>
                                     <li><a href="{{ route('clients.index') }}"><i class="fa fa-minus" aria-hidden="true"></i> Tous les Clients</a></li>
                                 </ul>
                             </li>
@@ -124,10 +124,10 @@
         </nav>
         @include('partials.success')
         @include('partials.errors')
-        <div class="container-fluid">
+        <div class="container" style="background-color: white">
                 @yield('charts')
         </div>
-        <div class="container">
+        <div class="container" style="background-color: white; padding: 3em">
             <div class="row">
                 @yield('content')
             </div>
@@ -139,7 +139,5 @@
     {!! Charts::scripts() !!}
         @yield('chartScript')
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <script src="https://use.fontawesome.com/8b3d88238a.js"></script>
 </body>
 </html>

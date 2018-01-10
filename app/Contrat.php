@@ -22,4 +22,15 @@ class Contrat extends Model
     public function payements(){
         return $this->hasMany('App\Payement');
     }
+    public static function envoiesMessage($to,$message){
+
+
+
+        $nexmo = app('Nexmo\Client');
+        $nexmo->message()->send([
+            'to'   => $to,
+            'from' => 'STA',
+            'text' => $message
+        ]);
+    }
 }

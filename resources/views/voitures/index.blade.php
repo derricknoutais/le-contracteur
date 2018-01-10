@@ -7,6 +7,14 @@
             <img class="card-img-top" src="https://imgct2.aeplcdn.com/img/800x600/car-data/big/maruti-suzuki-swift-default-image.png-version201710292106.png">
         </a>
         <div class="card-block">
+            <figure class="profile">
+                @if( $voiture->disponibilite != 1)
+                <img src="http://appartements-batyam.com/wp-content/uploads/2015/10/LOUER.png" class="profile-avatar" alt="">
+                @else
+                <img src="http://www.lillemetropole.fr/files/live/sites/lmcu/files/images/PICTOS-Services/habitat/recherche-logement-a-louer.png" class="profile-avatar" alt="">
+                @endif
+            </figure>
+
             <h4 class="card-title mt-3">{{ $voiture->immatriculation }}</h4>
             <div class="meta card-text">
                 <p>{{ $voiture->marque  . " " . $voiture->type }}</p>
@@ -49,11 +57,17 @@
                         <p> {{ $voiture->etat_voiture }}</p>
                         <h3 class="cost">{{ number_format($voiture->prix, 0) }} F CFA</h3>
                         <div class="space-ten"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
                         <div class="btn-ground">
                             <a type="button" class="btn btn-primary" href="contrats/create/{{ $voiture->id }}"><i class="fa fa-car"></i> Faire Louer </a>
                             <a type="button" href="voitures/{{ $voiture->id }}" class="btn btn-primary" ><i class="fa fa-eye"></i> Voir Plus</a>
+                            <a type="button" class="btn btn-primary" href="/voitures/{{ $voiture->id }}/edit">Au Garage</a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

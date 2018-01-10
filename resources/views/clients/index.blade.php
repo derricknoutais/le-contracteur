@@ -17,7 +17,6 @@
              <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#product_view{{ $client->id }}"><i class="fa fa-info-circle"></i> Détails</a>
 
             <a class="btn btn-primary float-right btn-xs" href="/clients/{{ $client->id }}/edit"><i class="fa fa-pencil-square-o"></i> Modifier</a>
-
             <a href="#" type="button" class="btn btn-primary btn-xs" onclick="var result = confirm('Etes vous sur de vouloir supprimer {{ $client->nom . " " . $client->prenom }} ?');
                 if(result){
                     event.preventDefault();

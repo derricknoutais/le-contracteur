@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePayementsTable extends Migration
+class CreatePannesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePayementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payements', function (Blueprint $table) {
+        Schema::create('pannes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('contrat_id')->unsigned();
-            $table->integer('versement');
-
-            $table->foreign('contrat_id')->references('id')->on('contrats')->onDelete('cascade');
+            $table->integer('voiture_id');
+            $table->string('panne');
+            $table->text('descritpion');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreatePayementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payements');
+        Schema::dropIfExists('pannes');
     }
 }

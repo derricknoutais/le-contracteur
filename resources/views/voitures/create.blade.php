@@ -22,23 +22,23 @@
                     </div>
                     <div class="form-group col-md-6" >
                         <label for="date_expiration_assurance">Assurance Expire Le<span class="required">*</span></label>
-                        <input id="date_expiration_assurance" type="date" name="date_expiration_assurance" class="form-control" spellcheck="false" required placeholder="" />
+                        <input id="date_expiration_assurance" type="date" name="date_expiration_assurance" class="form-control" spellcheck="false"  placeholder="" />
                     </div>
                     <div class="form-group col-md-6" >
                         <label for="date_expiration_carte_grise">Carte Grise Expire Le<span class="required">*</span></label>
-                        <input id="date_expiration_carte_grise" type="date" name="date_expiration_carte_grise" class="form-control" spellcheck="false" required placeholder="" />
+                        <input id="date_expiration_carte_grise" type="date" name="date_expiration_carte_grise" class="form-control" spellcheck="false"  placeholder="" />
                     </div>
                     <div class="form-group col-md-6" >
                         <label for="date_expiration_visite_technique">Visite Technique Expire Le<span class="required">*</span></label>
-                        <input id="date_expiration_visite_technique" type="date" name="date_expiration_visite_technique" class="form-control" spellcheck="false" required placeholder="" />
+                        <input id="date_expiration_visite_technique" type="date" name="date_expiration_visite_technique" class="form-control" spellcheck="false"  placeholder="" />
                     </div>
                     <div class="form-group col-md-6" >
                         <label for="date_expiration_carte_extincteur">Carte Extincteur Expire Le<span class="required">*</span></label>
-                        <input id="date_expiration_carte_extincteur" type="date" name="date_expiration_carte_extincteur" class="form-control" spellcheck="false" required />
+                        <input id="date_expiration_carte_extincteur" type="date" name="date_expiration_carte_extincteur" class="form-control" spellcheck="false"  />
                     </div>
                     <div class="form-group col-md-12" >
                         <label for="etat_voiture">État de la voiture<span class="required">*</span></label>
-                        <textarea id="etat_voiture" rows="5" name="etat_voiture"  class="form-control" spellcheck="false" required>
+                        <textarea id="etat_voiture" rows="5" name="etat_voiture"  class="form-control" spellcheck="false" >
                         </textarea>
                     </div>
                     <div class="form-group text-center">

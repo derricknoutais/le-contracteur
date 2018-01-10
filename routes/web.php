@@ -24,7 +24,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/contrats/create/{voiture_id}', 'ContratsController@create2');
     Route::get('/contrats/{client_id}/create', 'ContratsController@create');
     Route::resource('contrats', 'ContratsController');
-    Route::get('/contrats/edit/{contrat_id}', 'ContratsController@edit2');
+
+    Route::get('/contrats/edit/{contrat}', 'ContratsController@edit2');
+
+    Route::put('/contrats/retourner/{id}', 'ContratsController@retourner')->name('contrats.retourner');
+
 
     Route::resource('voitures', 'VoituresController');
 

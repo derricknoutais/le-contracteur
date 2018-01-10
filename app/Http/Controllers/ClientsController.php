@@ -10,11 +10,6 @@ use Carbon\Carbon;
 
 class ClientsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if(Auth::check()){
@@ -24,50 +19,16 @@ class ClientsController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('clients.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\PublishCustomerForm $form)
     {
-        if(Auth::check()){
-            $client = Client::create([
-                'nom' => $request->input('nom'),
-                'prenom' => $request->input('prenom'),
-                'date_naissance' => $request->input('date_naissance'),
-                'addresse' => $request->input('addresse'),
-                'ville' => $request->input('ville'),
-                'numero_permis' => $request->input('numero_permis'),
-                'numero_phone' => $request->input('numero_phone'),
-                'numero_phone2' => $request->input('numero_phone2'),
-                'email' => $request->input('email'),
-
-            ]);
-             if($client){
-                return redirect()->route('clients.show', ['client'=> $client->id])->with('success', 'Client crée avec succes');
-            }
-        }
-        return back()->withInput()->with('errors', 'Une erreur est survenue lors de la création du nouveau client');
+        $form->persist();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
     public function show(Client $client)
     {
         $client = Client::find($client->id);
@@ -75,53 +36,17 @@ class ClientsController extends Controller
         return view('clients.show', compact('client', 'contrats'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Client $client)
     {
         $client = Client::find($client->id);
         return view('clients.edit', compact('client'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, Client $client, \App\Http\Requests\PublishCustomerForm $form)
     {
-        if(Auth::check()){
-            $clientUpdate = Client::where('id', $client->id)->update([
-                'nom' => $request->input('nom'),
-                'prenom' => $request->input('prenom'),
-                'date_naissance' => $request->input('date_naissance'),
-                'addresse' => $request->input('addresse'),
-                'ville' => $request->input('ville'),
-                'numero_permis' => $request->input('numero_permis'),
-                'numero_phone' => $request->input('numero_phone'),
-                'numero_phone2' => $request->input('numero_phone2'),
-                'email' => $request->input('email'),
+        $form->persistUpdate($client);
+    }
 
-            ]);
-             if($clientUpdate){
-                return redirect()->route('clients.show', ['client'=> $client->id])->with('success', 'Company created successfully');
-            }
-        }
-        return back()->withInput()->with('errors', 'Error Creating new Company');
-}
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Client $client)
     {
         $findClient = Client::find($client->id)->delete();

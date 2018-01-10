@@ -32,8 +32,7 @@ class ContratsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($client_id = null)
-    {
+    public function create($client_id = null){
         $voitures = null;
         $clients = null;
         if($client_id){
@@ -61,41 +60,13 @@ class ContratsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, \App\Http\Requests\PublishContratForm $form)
     {
-        $validator = Validator::make($request->all(), [
-            'client_id' => 'required|integer',
-            'voiture_id' => 'required|integer|max:255',
-            'date_retour_prevue' => 'required|date' ,
-            'caution' => 'integer|required'
-        ]);
-        if ($validator->fails()) {
-            return redirect('contrats/create')->withErrors($validator)->withInput();
+        $contrat = $form->persistContrat();
+        if($contrat){
+            return redirect()->route('contrats.show', ['contrat'=> $contrat->id])->with('success', 'Contrat crée avec succes');
         } else {
-            if(Auth::check() ){
-                $voitureDisponible = Voiture::find($request->input('voiture_id'));
-
-                if($voitureDisponible->disponibilite){
-                    $contrat = Contrat::create([
-                        'client_id' => $request->input('client_id'),
-                        'voiture_id' => $request->input('voiture_id'),
-                        'date_retour_prevue' => Carbon::parse($request->input('date_retour_prevue'))->setTime(now()->hour,now()->minute, now()->second),
-                        'caution' => $request->input('caution'),
-
-                ]);
-                    if($contrat){
-                    $dispoVoiture = Voiture::where('id', $request->input('voiture_id'))->update([
-                        'disponibilite' => 0
-                    ]);
-                    return redirect()->route('contrats.show', ['contrat'=> $contrat->id])->with('success', 'Contrat crée avec succes');
-                } else {
-                    return back()->withInput()->with('errors', 'Une erreur est survenue lors de la création du contrat');
-                }
-            } else {
-                //return back()->withInput()->with('errors', 'Une erreur est survenue lors de la création du contrat');
-
-            }
-            }
+            return back()->withInput()->with('errors', 'Une erreur est survenue lors de la création du contrat');
         }
     }
 
@@ -150,40 +121,42 @@ class ContratsController extends Controller
         $validator = Validator::make($request->all(), [
             'client_id' => 'required|integer',
             'date_retour_prevue' => 'required|date' ,
-            'caution' => 'integer|required'
         ]);
         if ($validator->fails()) {
-            return redirect('contrats/create') ->withErrors($validator)->withInput();
+            return redirect('contrats/create')->withErrors($validator)->withInput();
         } else {
-            if(Auth::check() ){
-                    if($request->input('date_retour_reelle')){
-                        $retourner = true;
-                    } else{
-                        $retourner = false;
-                    }
-                    $contratUpdate = Contrat::where('id', $contrat->id)->update([
-                        'voiture_id' => $contrat->voiture_id,
-                        'client_id' => $request->input('client_id'),
-                        'date_retour_prevue' => Carbon::parse($request->input('date_retour_prevue'))->setTime(now()->hour,now()->minute, now()->second),
-                        'date_retour_reelle' => Carbon::parse($request->input('date_retour_reelle'))->setTime(now()->hour,now()->minute, now()->second),
-                        'caution' => $request->input('caution'),
-                ]);
-                    if($contratUpdate && $retourner){
-                        $retourVoiture = Voiture::where('id', $contrat->voiture_id)->update([
-                            'disponibilite' => 1
-                        ]);
-                        return redirect()->route('contrats.show', ['contrat'=> $contrat->id])->with('success', 'Contrat modifié avec succes');
-                    }
-
-                } else {
-                    return back()->withInput()->with('errors', 'Une erreur est survenue lors de la création du contrat');
-                }
+            $contratUpdate = Contrat::where('id', $contrat->id)->update([
+                'voiture_id' => $contrat->voiture_id,
+                'client_id' => $request->input('client_id'),
+                'date_retour_prevue' => Carbon::parse($request->input('date_retour_prevue'))->setTime(now()->hour,now()->minute, now()->second),
+            ]);
+            $cautionUpdate = Client::where('id', $contrat->client_id)->update([
+                'caution' => $request->caution
+            ]);
+            if ($contratUpdate && $cautionUpdate) {
+                return redirect('/contrats');
             }
         }
+    }
 
-
-    public function retourner(Request $request,Contrat $contrat){
-
+    public function retourner(Request $request, $contrat_id){
+        $contrat = Contrat::find($contrat_id);
+        $validator = Validator::make($request->all(), [
+            'client_id' => 'required|integer',
+            'date_retour_reelle' => 'required|date' ,
+            'caution' => 'integer|required'
+        ]);
+        if($validator->fails()){
+            return redirect('/contrats/retourner')->withErrors($validator)->withInput();
+        } else {
+            $retourContrat = Contrat::where('id', $contrat->id)->update([
+                'date_retour_reelle' => Carbon::parse($request->input('date_retour_reelle'))->setTime(now()->hour,now()->minute, now()->second),
+            ]);
+            $retourContrat = Client::where('id', $contrat->client_id)->update([
+                'caution' => $request->input('caution'),
+            ]);
+            return redirect('/contrats')->withSuccess('Voiture Retournée');
+        }
     }
     /**
      * Remove the specified resource from storage.

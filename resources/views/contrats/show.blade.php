@@ -85,13 +85,25 @@
                 <br />
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
-                <b>Assurance :</b> {{ $contrat->voiture->date_expiration_assurance->format('d-M-Y')  }}
+                <b>Assurance :</b>
+                @if($contrat->voiture->date_expiration_assurance)
+                {{ $contrat->voiture->date_expiration_assurance->format('d-M-Y')  }}
+                @endif
                 <br />
-                <b>A.P de Circuler :</b> {{ $contrat->voiture->date_expiration_carte_grise->format('d-M-Y')   }}
+                <b>
+                @if($contrat->voiture->date_expiration_carte_grise)
+                A.P de Circuler :</b> {{ $contrat->voiture->date_expiration_carte_grise->format('d-M-Y')   }}
+                @endif
                 <br />
-                <b>Visite Technique :</b> {{ $contrat->voiture->date_expiration_visite_technique->format('d-M-Y') }}
+                <b>
+                @if($contrat->voiture->date_expiration_carte_grise)
+                Visite Technique :</b> {{ $contrat->voiture->date_expiration_visite_technique->format('d-M-Y') }}
+                @endif
                 <br />
-                <b>Carte Extincteur:</b> {{ $contrat->voiture->date_expiration_carte_extincteur->format('d-M-Y')  }}
+                <b>
+                @if($contrat->voiture->date_expiration_carte_grise)
+                Carte Extincteur:</b> {{ $contrat->voiture->date_expiration_carte_extincteur->format('d-M-Y')  }}
+                @endif
                 <br />
             </div>
         </div>
@@ -183,15 +195,18 @@
             <div class="col-md-4">
                 <p>Date Retour Prévue: {{ $contrat->date_retour_prevue->format('d-M-Y') }} </p>
             </div>
-            @if ( ($contrat->date_retour_reelle)->format('d-M-Y') != '1000-11-23')
+            @if ( ($contrat->date_retour_reelle)->format('Y-m-d') != '1000-11-23')
                 <div class="col-md-4">
-                    <p>Date de Retour Réel: {{ $contrat->date_retour_reelle->format('d-M-Y') }} </p>
+                    <p>Date de Retour Réelle: {{ $contrat->date_retour_reelle->format('d-M-Y') }} </p>
                 </div>
             @endif
-        </div>
-        <div class="row">
             <div class="col-md-4">
-                <p>Nombre de Jours: {{ ( $contrat->created_at->startOfDay() )->diffInDays($contrat->date_retour_reelle->startOfDay() ) }}</p>
+                <p>Nombre de Jours:
+                    @if ( ($contrat->date_retour_reelle)->format('Y-m-d') != '1000-11-23')
+                    {{ ( $contrat->created_at->startOfDay() )->diffInDays($contrat->date_retour_reelle->startOfDay() ) }}</p>
+                    @else
+                    {{ ( $contrat->created_at->startOfDay() )->diffInDays($contrat->date_retour_prevue->startOfDay() ) }}</p>
+                    @endif
             </div>
         </div>
     </div>

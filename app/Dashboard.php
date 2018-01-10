@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Voiture;
 use App\Contrat;
+use DB;
 use Charts;
 use DateTime;
 use DateInterval;
@@ -35,6 +36,11 @@ class Dashboard extends Model
             ->groupByDay()
             ->title("Nombre de Location Journaliere")
             ->responsive('true');
+        return $chart;
+    }
+    static public function payementMensuel(){
+        $data = Payement::select('created_at', DB::raw('sum(versement) as aggregate'))->groupBy(DB::raw('created_at'))->get();
+        $chart = Charts::database($data)->preaggregated(true)->lastByDay(14, false);
         return $chart;
     }
 }

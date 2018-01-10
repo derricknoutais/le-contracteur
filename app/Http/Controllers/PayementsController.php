@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Payement;
 use App\Contrat;
+use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -57,10 +58,19 @@ class PayementsController extends Controller
             return redirect('contrats/create')->withErrors($validator)->withInput();
         } else {
             if(Auth::check() ){
-                    $payement = Payement::create([
-                        'contrat_id' => $request->input('contrat_id'),
-                        'versement' => $request->input('versement'),
+                $contrat = Contrat::where('id', $request->input('contrat_id') )->first();
+
+                $payement = Payement::create([
+                    'contrat_id' => $request->input('contrat_id'),
+                    'versement' => $request->input('versement'),
                 ]);
+
+                if($request->input('versement') > $contrat->voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay()) ){
+
+                    $balance = Client::where('id', $request->input('client_id'))->update([
+                        'balance' => $request->input('versement') - $contrat->voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay())
+                    ]);
+                }
                 if($payement){
                     return redirect()->route('contrats.show', ['payement'=> $payement->contrat_id])->with('success', 'Contrat crée avec succes');
                 } else {

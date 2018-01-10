@@ -94,10 +94,10 @@
                             disabled="disabled"
                             href="#"
                         @else
-                            href="payements/create/{{ $contrat->id }}"
+                            href="/payements/create/{{ $contrat->id }}"
                         @endif >Créer un payement</a>
 
-                        <a href="contrats/{{ $contrat->id }}/edit" class="btn btn-primary btn-sm">Editer</a>
+                        <a href="/contrats/{{ $contrat->id }}/edit" class="btn btn-primary btn-sm">Editer</a>
 
                         {{-- <a href="#" type="button" class="btn btn-primary btn-sm" onclick="var result = confirm('Etes vous sur de vouloir supprimer un client?');
                             if(result){
@@ -114,7 +114,7 @@
                                     disabled="disabled"
                                     href="#"
                                 @else
-                                    href="contrats/edit/{{ $contrat->id }}"
+                                    href="/contrats/edit/{{ $contrat->id }}"
                                 @endif
                             >Retourner</a>
                        <form id="retour-form" action="{{ route('contrats.update' , [$contrat->id]) }}" method="POST" style="display: none;">

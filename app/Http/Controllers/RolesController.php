@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Dashboard;
-use Illuminate\Http\Request;
-use Charts;
-use App\User;
 use App\Role;
-use App\Contrat;
-use App\Voiture;
+use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class RolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
-        $tauxLocation = Dashboard::tauxLocation();
-        $locationMensuelle  = Dashboard::locationMensuelle();
-        $locationJournaliere  = Dashboard::locationJournaliere();
-        $payementMensuel = Dashboard::payementMensuel();
-
-        return view('dashboard.index', compact('tauxLocation', 'locationMensuelle', 'locationJournaliere', 'payementMensuel'));
+        //
     }
 
     /**
@@ -46,16 +35,16 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Dashboard  $dashboard
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Dashboard $dashboard)
+    public function show(Role $role)
     {
         //
     }
@@ -63,10 +52,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Dashboard  $dashboard
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dashboard $dashboard)
+    public function edit(Role $role)
     {
         //
     }
@@ -75,10 +64,10 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Dashboard  $dashboard
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dashboard $dashboard)
+    public function update(Request $request, Role $role)
     {
         //
     }
@@ -86,10 +75,10 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Dashboard  $dashboard
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dashboard $dashboard)
+    public function destroy(Role $role)
     {
         //
     }
