@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::middleware(['auth'])->group(function(){
     Route::get('/contrats/create/', 'ContratsController@create');
     Route::get('/contrats/create/{voiture_id}', 'ContratsController@create2');
     Route::get('/contrats/{client_id}/create', 'ContratsController@create');
@@ -38,6 +38,7 @@ Auth::routes();
     Route::get('/payements/create/{contrat_id}', 'PayementsController@create2');
 
     Route::resource('dashboard', 'DashboardController');
+});
 
 
 Route::get('/home', 'HomeController@index')->name('home');
