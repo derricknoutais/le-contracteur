@@ -26,7 +26,13 @@ class ClientsController extends Controller
 
     public function store(\App\Http\Requests\PublishCustomerForm $form)
     {
-        $form->persist();
+        $clientCréé = $form->persist();
+        if($clientCréé){
+            return redirect()->route('clients.show', ['client'=> $clientCréé->id])->with('success', 'Client créé avec succes');
+        } else {
+            return back()->withInput()->with('errors', 'Une erreur est survenue lors de la création du nouveau client');
+        }
+
     }
 
     public function show(Client $client)
