@@ -10,7 +10,8 @@ class Contrat extends Model
         'client_id',
         'voiture_id',
         'date_retour_prevue',
-        'caution'
+        'caution',
+        'remise'
     ];
     protected $dates = ['created_at', 'updated_at', 'date_retour_prevue' , 'date_retour_reelle'];
     public function client(){

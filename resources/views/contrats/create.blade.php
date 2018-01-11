@@ -38,8 +38,14 @@
                     </div>
                     <div class="form-group col-md-6" >
                         <label for="caution">Caution<span class="required">*</span></label>
-                        <input id="caution" type="number" name="caution" class="form-control" spellcheck="false" required value="100000" />
+                        <input id="caution" type="number" name="caution" class="form-control" spellcheck="false" required value="0" step="10000"/>
                     </div>
+                    @if(Auth::user()->role < 2)
+                        <div class="form-group col-md-6" >
+                            <label for="remise">Remise<span class="required">*</span></label>
+                            <input id="remise" type="number" name="remise" class="form-control" spellcheck="false" required value="0" step="5000" />
+                        </div>
+                    @endif
 
                     <div class="form-group" >
                         <input type="submit" class="btn btn-primary" value="Submit" />

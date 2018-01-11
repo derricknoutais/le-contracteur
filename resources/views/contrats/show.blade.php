@@ -29,21 +29,19 @@
              <hr />
          </div>
      </div>
-     <div  class="row pad-top-botm client-info">
-         <div class="col-lg-4 col-md-4 col-sm-4">
-         <h4>  <strong>Information Client</strong></h4>
-           <strong>{{ $contrat->client->prenom . " " . $contrat->client->nom }}</strong>
-             <br />
+    <div  class="row pad-top-botm client-info">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <h4>  <strong>Information Client</strong></h4>
+            <strong>{{ $contrat->client->prenom . " " . $contrat->client->nom }}</strong>
+            <br />
                 <b>Phone :</b>{{ $contrat->client->numero_phone }} @if($contrat->client->numero_phone2 != "") / {{ $contrat->client->numero_phone2  }} @endif
-             <br />
-                  <b>Address :</b>{{ $contrat->client->addresse }}
-              <br />
+            <br />
+                    <b>Address :</b>{{ $contrat->client->addresse }}
+            <br />
                  {{ $contrat->client->ville }}
-
-
               <br />
              <b>E-mail :</b>{{ $contrat->client->email  }}
-         </div>
+        </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
 
         </div>
@@ -52,17 +50,11 @@
         	<h4>  <strong>Details de Payement </strong></h4>
         	<strong>Date :</strong> {{ ($contrat->created_at)->format('d-M-Y') . " @ " .  ($contrat->created_at)->format('H:i:s') }}
             <br />
-            <b>Total Facture :  {{ number_format($contrat->voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay()), 0) }} F CFA</b>
+            <b>Total Facture :  {{ number_format( ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay()), 0) }} F CFA</b>
               <br />
-            @php
-            $somme =0;
-              foreach ($payements as $payement) {
-                $somme += $payement->versement;
-              }
-            @endphp
-
-            <b>Somme Versée: </b> {{ number_format($somme, 0) }} F Cfa
-
+            @foreach($contrat->payements as $payement)
+            <p><b>Somme Versée: </b> {{ number_format($payement->sum('versement')) }} F Cfa</p>
+            @endforeach
               <br />
               <p><b>Caution:</b>{{ number_format($contrat->caution,0) }} F Cfa</p>
          </div>
@@ -79,8 +71,9 @@
                 <br />
                 <b>Marque :</b>{{ $contrat->voiture->marque . " " . $contrat->voiture->type  }}
                 <br />
-                <b>Prix Journalier :</b>{{ number_format($contrat->voiture->prix, 0) . " F Cfa"}}
+                <b>Prix Journalier :</b>{{ number_format($contrat->voiture->prix - $contrat->remise, 0) . " F Cfa"}}
                 <br />
+
                 <b>Type Carburant:</b> Essence
                 <br />
             </div>
@@ -218,19 +211,26 @@
              <div class="ttl-amts">
              @if ( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' )
 
-                <h5>  Montant Total : {{ number_format($contrat->voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay()), 0) }} F Cfa</h5>
+                <h5>  Montant Total : {{ number_format(($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay()), 0) }} F Cfa</h5>
             @else
-               <h5>  Montant Total : {{ number_format($contrat->voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_reelle)->startOfDay()), 0) }} F Cfa</h5>
+                @if ( (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_reelle)->startOfDay()) == 0)
+                     <h5>  Montant Total : {{ number_format( ($contrat->voiture->prix - $contrat->remise), 0) }} F Cfa</h5>
+                @else
+               <h5>  Montant Total : {{ number_format( ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_reelle)->startOfDay()), 0) }} F Cfa</h5>
+               @endif
             @endif
 
              </div>
              <hr>
               <div class="ttl-amts">
-                  <h5><b>Caution:</b> {{ number_format($contrat->caution,0) }} F Cfa</h5>
+                  <h5><b>Caution:</b> {{ number_format($contrat->client->caution,0) }} F Cfa</h5>
              </div>
              <hr />
               <div class="ttl-amts">
-                  <h4><b>Somme Versée: </b> {{ number_format($somme, 0) }} F Cfa </h4>
+                    @foreach ($contrat->payements as $payement)
+                        <h4><b>Somme Versée: </b> {{ number_format($payement->sum('versement')) }} F Cfa </h4>
+                    @endforeach
+
              </div>
          </div>
      </div>

@@ -141,6 +141,7 @@ class ContratsController extends Controller
 
     public function retourner(Request $request, $contrat_id){
         $contrat = Contrat::find($contrat_id);
+
         $validator = Validator::make($request->all(), [
             'client_id' => 'required|integer',
             'date_retour_reelle' => 'required|date' ,
@@ -149,11 +150,15 @@ class ContratsController extends Controller
         if($validator->fails()){
             return redirect('/contrats/retourner')->withErrors($validator)->withInput();
         } else {
+            $client = Client::find($contrat->client_id);
             $retourContrat = Contrat::where('id', $contrat->id)->update([
                 'date_retour_reelle' => Carbon::parse($request->input('date_retour_reelle'))->setTime(now()->hour,now()->minute, now()->second),
             ]);
             $retourContrat = Client::where('id', $contrat->client_id)->update([
-                'caution' => $request->input('caution'),
+                'caution' => ($client->caution - $request->input('caution')),
+            ]);
+            $retourVoiture = Voiture::where('id', $contrat->voiture_id)->update([
+                'disponibilite' => 1
             ]);
             return redirect('/contrats')->withSuccess('Voiture Retournée');
         }

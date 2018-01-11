@@ -32,17 +32,19 @@ class PublishContratForm extends FormRequest
             'client_id' => 'required|integer',
             'voiture_id' => 'required|integer|max:255',
             'date_retour_prevue' => 'required|date' ,
-            'caution' => 'integer|required'
+            'caution' => 'integer|required',
+            'remise' => 'integer'
         ];
     }
     public function persistContrat(){
-        $voitureDisponible = Voiture::find($this->input('voiture_id'));
-                if($voitureDisponible->disponibilite){
+        $voitureSelectionnée = Voiture::find($this->input('voiture_id'));
+                if($voitureSelectionnée->disponibilite){
                     $client = Client::where('id', $this->input('client_id'))->first();
                     $contrat = Contrat::create([
                         'client_id' => $this->input('client_id'),
                         'voiture_id' => $this->input('voiture_id'),
                         'date_retour_prevue' => Carbon::parse($this->input('date_retour_prevue'))->setTime(now()->hour,now()->minute, now()->second),
+                        'remise' => $this->input('remise')
                     ]);
                     $caution = Client::where('id', $this->input('client_id'))->update([
                         'caution' => $client->caution + $this->input('caution')
@@ -67,9 +69,9 @@ class PublishContratForm extends FormRequest
 
 
 
-                        $message = 'Merci ' . $client->nom . ' ' . $client->prenom . ' de nous faire confiance et de louer vos voitures avec STA.' . ' Les détails de votre nouveau contrat sont les suivants Immatriculation Voiture: '.  $voiture->immatriculation . ' Date de Retour: ' . $contrat->date_retour_prevue->format('d-M-Y') ;
+                        // $message = 'Merci ' . $client->nom . ' ' . $client->prenom . ' de nous faire confiance et de louer vos voitures avec STA.' . ' Les détails de votre nouveau contrat sont les suivants Immatriculation Voiture: '.  $voiture->immatriculation . ' Date de Retour: ' . $contrat->date_retour_prevue->format('d-M-Y') ;
 
-                        Contrat::envoiesMessage('24104727040', $message );
+                        // Contrat::envoiesMessage('24104727040', $message );
                         return $contrat;
                     }
             }

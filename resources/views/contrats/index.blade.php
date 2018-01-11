@@ -33,16 +33,21 @@
                             foreach ($payements as $payement) {
                                 $sommeVersee += $payement->versement;
                             }
-                            //Calcule le prix de location selon la date prévue
-                            if ( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' && ($contrat->date_retour_prevue)->format('Y-m-d') >= Carbon::parse(now()) ){
-                            $balance = $sommeVersee - $contrat->voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay());
-                            }
-                            //Si la date prévue est passée et la voiture n'est pas retournée
-                            else if ( ($contrat->date_retour_prevue)->format('Y-m-d') <= Carbon::parse(now()) && ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' ) {
-                            $balance = $sommeVersee - $contrat->voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays((Carbon::parse( now() ))->startOfDay());
+                            if( (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_reelle)->startOfDay()) == 0 ){
+                                $balance = $sommeVersee - ($contrat->voiture->prix - $contrat->remise) ;
                             } else {
-                                $balance = $sommeVersee - $contrat->voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_reelle)->startOfDay());
+                                if ( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' && ($contrat->date_retour_prevue)->format('Y-m-d') >= Carbon::parse(now()) ){
+                                $balance = $sommeVersee - ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay());
+                                }
+                                //Si la date prévue est passée et la voiture n'est pas retournée
+                                else if ( ($contrat->date_retour_prevue)->format('Y-m-d') <= Carbon::parse(now()) && ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' ) {
+                                $balance = $sommeVersee - ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays((Carbon::parse( now() ))->startOfDay());
+                                } else {
+                                    $balance = $sommeVersee - ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_reelle)->startOfDay());
+                                }
                             }
+                            //Calcule le prix de location selon la date prévue
+
 
 
                         }}

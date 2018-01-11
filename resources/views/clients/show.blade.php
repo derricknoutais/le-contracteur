@@ -48,9 +48,9 @@
                                 $sommeVersee += $payement->versement;
                             }
                             if($contrat->date_retour_reelle == '1000-11-23 00:00:00' && $contrat->date_retour_prevue < Carbon\Carbon::now()  ){
-                                $total = $voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays((Carbon\Carbon::now())->startOfDay());
+                                $total = ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays((Carbon\Carbon::now())->startOfDay());
                             } else {
-                                $total = $voiture->prix * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay());
+                                $total = ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay());
                             }
 
                             $totalFacture += $total;
@@ -60,7 +60,7 @@
                     @endphp
                     <tr>
                         <td>  {{$contrat->id }}</td>
-                        <td> {{ $client->nom ." ". $client->prenom }}</td>
+                        <td> {{ $contrat->client->nom ." ". $contrat->client->prenom }}</td>
                         <td>@if ( $contrat->date_retour_reelle != '1000-11-23 00:00:00' )
                         Retourné
                         @elseif($contrat->date_retour_reelle == '1000-11-23 00:00:00' && $contrat->date_retour_prevue < Carbon\Carbon::now()  )
