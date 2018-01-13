@@ -78,9 +78,9 @@ class ContratsController extends Controller
      */
     public function show(Contrat $contrat)
     {
-        $payements = Payement::where('contrat_id', $contrat->id)->get();
-
+        $payements = Payement::where('contrat_id', $contrat->id)->sum('versement');
         $contrat = Contrat::find($contrat->id);
+
         return view('contrats.show' , compact('contrat', 'payements'));
     }
 

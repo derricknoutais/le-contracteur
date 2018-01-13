@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('content')
-
+@section('content')s
 <div class="container">
+
     <div class="row pad-top-botm ">
         <div class="col-lg-6 col-md-6 col-sm-6 ">
             <img src="https://scontent.fauh1-1.fna.fbcdn.net/v/t1.0-9/19884087_166912523851010_9069674227465647267_n.png?oh=6a25a062cc7554ad975c8426deeb7fa2&oe=5A69312F" style="padding-bottom:20px;" />
@@ -52,9 +52,8 @@
             <br />
             <b>Total Facture :  {{ number_format( ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay()), 0) }} F CFA</b>
               <br />
-            @foreach($contrat->payements as $payement)
-            <p><b>Somme Versée: </b> {{ number_format($payement->sum('versement')) }} F Cfa</p>
-            @endforeach
+            <p><b>Somme Versée: </b> {{ number_format($payements) }} F Cfa</p>
+
               <br />
               <p><b>Caution:</b>{{ number_format($contrat->caution,0) }} F Cfa</p>
          </div>
