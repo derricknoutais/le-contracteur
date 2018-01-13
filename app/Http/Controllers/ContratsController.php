@@ -119,6 +119,7 @@ class ContratsController extends Controller
     public function update(Request $request, Contrat $contrat)
     {
         $validator = Validator::make($request->all(), [
+            'voiture_id' => 'required|integer',
             'client_id' => 'required|integer',
             'date_retour_prevue' => 'required|date' ,
         ]);
@@ -126,7 +127,7 @@ class ContratsController extends Controller
             return redirect('contrats/create')->withErrors($validator)->withInput();
         } else {
             $contratUpdate = Contrat::where('id', $contrat->id)->update([
-                'voiture_id' => $contrat->voiture_id,
+                'voiture_id' => $request->input('voiture_id'),
                 'client_id' => $request->input('client_id'),
                 'date_retour_prevue' => Carbon::parse($request->input('date_retour_prevue'))->setTime(now()->hour,now()->minute, now()->second),
             ]);

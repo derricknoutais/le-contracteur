@@ -95,14 +95,13 @@
                     <td>
                     {{ number_format($balance) }}</td>
                     <td>
-                        <a  class="btn btn-primary btn-sm" @if ($balance>=0)
-                            disabled="disabled"
-                            href="#"
-                        @else
-                            href="/payements/create/{{ $contrat->id }}"
-                        @endif >Créer un payement</a>
+                        @if ($balance < 0)
+                        <a  class="btn btn-primary btn-sm" href="/payements/create/{{ $contrat->id }}">Créer un payement</a>
+                        @endif
 
+                        @if( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' )
                         <a href="/contrats/{{ $contrat->id }}/edit" class="btn btn-primary btn-sm">Editer</a>
+                        @endif
 
                         {{-- <a href="#" type="button" class="btn btn-primary btn-sm" onclick="var result = confirm('Etes vous sur de vouloir supprimer un client?');
                             if(result){
@@ -113,15 +112,9 @@
                                     <input type="hidden" name="_method" value="delete">
                                     {{ csrf_field() }}
                             </form> --}}
-
-                            <a type="button" class="btn btn-primary btn-sm"
-                                @if( ($contrat->date_retour_reelle)->format('Y-m-d') != '1000-11-23' )
-                                    disabled="disabled"
-                                    href="#"
-                                @else
-                                    href="/contrats/edit/{{ $contrat->id }}"
-                                @endif
-                            >Retourner</a>
+                            @if( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23')
+                            <a type="button" class="btn btn-primary btn-sm" href="/contrats/edit/{{ $contrat->id }}">Retourner</a>
+                            @endif
                        <form id="retour-form" action="{{ route('contrats.update' , [$contrat->id]) }}" method="POST" style="display: none;">
                                <input type="hidden" name="_method" value="put">
                                {{ csrf_field() }}

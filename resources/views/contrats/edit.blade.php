@@ -9,7 +9,7 @@
                     @if($voitures != null )
                     <div class="form-group col-md-6" >
                         <label for="voiture_id">Choisissez la voiture<span class="required">*</span></label>
-                        <select id="voiture_id" type="text" name="voiture_id" class="form-control" spellcheck="false" required disabled placeholder="30000, 50000" >
+                        <select id="voiture_id" type="text" name="voiture_id" class="form-control" spellcheck="false" required placeholder="30000, 50000" >
                             @forelse($voitures as $voiture)
                             <option @if ($voiture->id == $contrat->voiture_id)
                                 selected

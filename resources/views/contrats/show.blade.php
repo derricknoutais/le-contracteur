@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-@section('content')s
+@section('content')
 <div class="container">
-
     <div class="row pad-top-botm ">
         <div class="col-lg-6 col-md-6 col-sm-6 ">
             <img src="https://scontent.fauh1-1.fna.fbcdn.net/v/t1.0-9/19884087_166912523851010_9069674227465647267_n.png?oh=6a25a062cc7554ad975c8426deeb7fa2&oe=5A69312F" style="padding-bottom:20px;" />
