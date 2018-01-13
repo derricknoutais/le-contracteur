@@ -35,7 +35,7 @@ class PublishCustomerForm extends FormRequest
         ];
     }
     public function persist(){
-            $client = Client::create([
+            return $client = Client::create([
                 'nom' => $this->input('nom'),
                 'prenom' => $this->input('prenom'),
                 'date_naissance' => $this->input('date_naissance'),
@@ -46,7 +46,6 @@ class PublishCustomerForm extends FormRequest
                 'numero_phone2' => $this->input('numero_phone2'),
                 'email' => $this->input('email'),
             ]);
-            return back()->withInput()->with('errors', 'Une erreur est survenue lors de la création du nouveau client');
     }
     public function persistUpdate(Client $client){
         $clientUpdate = Client::where('id', $client->id)->update([
