@@ -6,7 +6,7 @@
         <a href="#product_view" data-toggle="modal" data-target="#product_view"><img src="https://imgct2.aeplcdn.com/img/800x600/car-data/big/maruti-suzuki-swift-default-image.png-version201710292106.png" name="aboutme" width="160" height="160" class="img-circle img-responsive"></a>
         <h3>{{ $voiture->immatriculation }}</h3>
         <p><em>{{ $voiture->marque . " " . $voiture->type }}</em></p>
-        <a type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Faire Louer</a>
+        <a type="button" class="btn btn-primary" href="/contrats/create/{{ $voiture->id }}"><span class="glyphicon glyphicon-shopping-cart"></span> Faire Louer</a>
     </center>
 </div>
 <div class="col-xs-12 col-md-12 col">

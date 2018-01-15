@@ -1,8 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-    @foreach($clients as $client)
-        <div class="col-sm-6 col-md-4 col-lg-3">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nom &amp; Prénom</th>
+                    <th>Nº Téléphone</th>
+                    <th>Nº Permis</th>
+                    <th>Caution</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($clients as $client)
+                <tr>
+                    <td><a href="/clients/{{ $client->id }}" title="">{{ $client->nom . " " . $client->prenom }}</a></td>
+                    <td>{{ $client->numero_phone }}</td>
+                    <td>{{ $client->numero_permis }}</td>
+                    <td>{{ $client->caution }}</td>
+                </tr>
+
+                @endforeach
+            </tbody>
+        </table>
+        {{-- <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="card card-inverse card-info">
                 <img class="card-img-top img-responsive" src="https://avatars1.githubusercontent.com/u/11767240?v=3&s=400">
                 <div class="card-block">
@@ -28,7 +49,7 @@
                         </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="modal fade product_view" id="product_view{{ $client->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -59,5 +80,4 @@
                 </div>
             </div>
         </div>
-    @endforeach
 @endsection

@@ -3,10 +3,8 @@
 
 @endsection
 @section('charts')
-<div class="row text-center bg-danger">
-    <div class="col-md-4">
-        <h1>Salut {{ Auth::user()->first_name }} voici ce qui se passe sur votre parc auto</h1>
-    </div>
+
+<div class="row" style="margin: 5em;">
     <div class="col-lg-3 col-md-3 col-sm-3 ">
         <div class="card card-stats bg-warning">
             <div class="card-header bg-success text-center" data-background-color="orange">
@@ -20,10 +18,6 @@
             </div>
         </div>
     </div>
-
-</div>
-<div class="row" style="margin: 5em;">
-
 </div>
 {{-- <div class="row">
     <div class="col-lg-2 col-md-2 col-sm-3">

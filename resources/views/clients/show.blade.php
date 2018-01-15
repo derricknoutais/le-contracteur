@@ -7,7 +7,7 @@
         <h3>{{ $client->nom . " " . $client->prenom }}</h3>
         <h4>Caution: {{ number_format($client->caution) }} CFA</h4>
         <p><em>{{ $client->numero_phone  }} @if($client->numero_phone != "") / {{ $client->numero_phone2  }} @endif </em></p>
-        <a type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Faire Louer</a>
+        <a type="button" class="btn btn-primary" href="/contrats/{{ $client->id }}/create"><span class="glyphicon glyphicon-shopping-cart"></span> Faire Louer</a>
     </center>
 </div>
 <div class="col-xs-12 col-md-12 col">
