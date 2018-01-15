@@ -226,7 +226,7 @@
              <hr />
               <div class="ttl-amts">
                     @foreach ($contrat->payements as $payement)
-                        <h4><b>Somme Versée: </b> {{ number_format($payement->sum('versement')) }} F Cfa </h4>
+                        <h4><b>Somme Versée: </b> {{ number_format($payements) }} F Cfa </h4>
                     @endforeach
 
              </div>
