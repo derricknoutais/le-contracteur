@@ -49,9 +49,9 @@
                         <td>  {{$contrat->id }}</td>
                         <td> {{ $client->nom ." ". $client->prenom }}</td>
                         <td>@if ( $contrat->date_retour_reelle != '1000-11-23 00:00:00' )
-                        Retourné
+                        {{ $contrat->date_retour_reelle }}
                         @else
-                        {{ $contrat->date_retour_prevue }}
+                        En Location
                         @endif</td>
                         <td>{{ number_format($total) }}</td>
                         <td>{{ $sommeVersee }}</td>

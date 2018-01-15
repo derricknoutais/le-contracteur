@@ -23,24 +23,30 @@ class Dashboard extends Model
     static public function locationMensuelle(){
         $data = Contrat::all();
         $today = getDate();
-        $chart = Charts::database($data, 'line', 'highcharts')
-            ->dateColumn('date_retour_prevue')->groupByMonth($today['year'])
-            ->title("Nombre de Location Mensuelle")
-            ->responsive('true');
+        $chart = Charts::database($data, 'bar', 'highcharts')
+            ->dateColumn('date_retour_prevue')
+            ->elementLabel("Total")
+            ->responsive(true)
+            ->lastByMonth(6, true);
         return $chart;
     }
     static public function locationJournaliere(){
         $today = getDate();
         $data = Contrat::all();
-        $chart = Charts::database($data, 'line', 'highcharts')
-            ->groupByDay()
+        $chart = Charts::database($data, 'bar', 'highcharts')
             ->title("Nombre de Location Journaliere")
-            ->responsive('true');
+            ->responsive('true')
+            ->lastByDay(14);
         return $chart;
     }
     static public function payementMensuel(){
-        $data = Payement::select('created_at', DB::raw('sum(versement) as aggregate'))->groupBy(DB::raw('created_at'))->get();
-        $chart = Charts::database($data)->preaggregated(true)->lastByDay(14, false);
+        $data = Contrat::select('contrats.created_at', DB::raw('count(contrats.id) as aggregate'))->groupBy(DB::raw('Date(contrats.created_at)'))->get(); //must alias the aggregate column as aggregate
+
+    $chart = Charts::database($data)->preaggregated(true)->lastByDay(7, false);
         return $chart;
+    }
+    static public function totalPayement(){
+        $today = getDate();
+        return $payementTotal = Payement::whereMonth('created_at', $today['mon'])->sum('versement');
     }
 }

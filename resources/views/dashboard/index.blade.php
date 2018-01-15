@@ -3,8 +3,27 @@
 
 @endsection
 @section('charts')
-<div class="row text-center">
-    <h1>Dashboard</h1>
+<div class="row text-center bg-danger">
+    <div class="col-md-4">
+        <h1>Salut {{ Auth::user()->first_name }} voici ce qui se passe sur votre parc auto</h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 ">
+        <div class="card card-stats bg-warning">
+            <div class="card-header bg-success text-center" data-background-color="orange">
+                Total Mensuel
+            </div>
+            <div class="card-content">
+                <p class="category"></p>
+                <h3 class="title text-center">{{ $payementMensuel }}
+                    <small>F CFA</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row" style="margin: 5em;">
+
 </div>
 {{-- <div class="row">
     <div class="col-lg-2 col-md-2 col-sm-3">
@@ -124,21 +143,20 @@
 </div> --}}
 
 <div class="row" style="margin: 2em;">
-    <div class="col-md-4">
+    <div class="col-md-8 col-md-offset-2">
     {!! $locationJournaliere->html() !!}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-8 col-md-offset-2">
         {!! $tauxLocation->html() !!}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-8 col-md-offset-2">
+        {!! $locationMensuelle->html() !!}
+    </div>
+    <div class="col-md-8 col-md-offset-2">
         {!! $locationMensuelle->html() !!}
     </div>
 </div>
-<div class="row" style="margin: 2em;">
-    <div class="col-md-4">
-    {!! $payementMensuel->html() !!}
-    </div>
-</div>
+
 
 
 
@@ -148,5 +166,5 @@
 {!! $tauxLocation->script() !!}
 {!! $locationMensuelle->script() !!}
 {!! $locationJournaliere->script() !!}
-{!! $payementMensuel->script() !!}
+{!! $locationJournaliere->script() !!}
 @endsection

@@ -54,7 +54,7 @@
             <p><b>Somme Versée: </b> {{ number_format($payements) }} F Cfa</p>
 
               <br />
-              <p><b>Caution:</b>{{ number_format($contrat->caution,0) }} F Cfa</p>
+              <p><b>Caution:</b>{{ number_format($contrat->client->caution,0) }} F Cfa</p>
          </div>
      </div>
      <hr>
