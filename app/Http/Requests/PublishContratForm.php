@@ -44,7 +44,8 @@ class PublishContratForm extends FormRequest
                         'client_id' => $this->input('client_id'),
                         'voiture_id' => $this->input('voiture_id'),
                         'date_retour_prevue' => Carbon::parse($this->input('date_retour_prevue'))->setTime(now()->hour,now()->minute, now()->second),
-                        'remise' => $this->input('remise')
+                        'remise' => $this->input('remise'),
+                        'created_at' => $this->input('created_at')
                     ]);
                     $caution = Client::where('id', $this->input('client_id'))->update([
                         'caution' => $client->caution + $this->input('caution')

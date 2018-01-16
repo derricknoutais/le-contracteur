@@ -12,8 +12,34 @@
             </div>
             <div class="card-content">
                 <p class="category"></p>
-                <h3 class="title text-center">{{ $payementMensuel }}
+                <h3 class="title text-center">{{ number_format($payementMensuel) }}
                     <small>F CFA</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 ">
+        <div class="card card-stats bg-warning">
+            <div class="card-header bg-success text-center" data-background-color="orange">
+                Moyenne Dépensée par Location
+            </div>
+            <div class="card-content">
+                <p class="category"></p>
+                <h3 class="title text-center">{{ number_format($payementMensuel/$nombreFacture, 0) }}
+                    <small>F CFA</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 ">
+        <div class="card card-stats bg-warning">
+            <div class="card-header bg-success text-center" data-background-color="orange">
+                Durée Moyenne par Location
+            </div>
+            <div class="card-content">
+                <p class="category"></p>
+                <h3 class="title text-center">{{ number_format($averageDay, 2) }}
+                    <small>Days</small>
                 </h3>
             </div>
         </div>

@@ -25,7 +25,7 @@
                         <label for="client_id">Choisissez le client<span class="required">*</span></label>
                         <select id="client_id" type="text" name="client_id" class="form-control" spellcheck="false" required placeholder="30000, 50000" >
                             @foreach($clients as $client)
-                            <option  selected value="{{ $client->id }}"> {{ $client->nom }} </option>
+                            <option  selected value="{{ $client->id }}"> {{ $client->nom . " " . $client->prenom }} </option>
                             @endforeach
                         </select>
                     </div>
@@ -44,6 +44,12 @@
                         <div class="form-group col-md-6" >
                             <label for="remise">Remise<span class="required">*</span></label>
                             <input id="remise" type="number" name="remise" class="form-control" spellcheck="false" required value="0" step="5000" />
+                        </div>
+                    @endif
+                    @if(Auth::user()->role < 2)
+                        <div class="form-group col-md-6" >
+                            <label for="created_at">Date du Jour<span class="required">*</span></label>
+                            <input id="created_at" type="date" name="created_at" class="created_at" spellcheck="false" required value="{{ Carbon::now() }}"/>
                         </div>
                     @endif
 

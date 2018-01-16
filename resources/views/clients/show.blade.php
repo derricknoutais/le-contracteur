@@ -30,12 +30,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                        @php
-                            $balance = 0;
-                            $totalFacture = 0;
-                            $totalVersee = 0;
-
-                        @endphp
+                    @php
+                        $balance = 0;
+                        $totalFacture = 0;
+                        $totalVersee = 0;
+                    @endphp
                     @foreach($contrats as $contrat)
                     @php
                         {{

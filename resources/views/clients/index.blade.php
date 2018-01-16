@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <h1 class="page-header text-center">Liste de Clients</h1>
         <table class="table table-hover">
             <thead>
                 <tr>

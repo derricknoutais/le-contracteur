@@ -14,7 +14,7 @@ class VoituresController extends Controller
     public function index()
     {
         if(Auth::check()){
-            $voitures = Voiture::all()->sortBy("Immatriculation");
+            $voitures = Voiture::all()->sortBy("immatriculation");
             return view('voitures.index', compact('voitures'));
         }
         return view('auth.login');

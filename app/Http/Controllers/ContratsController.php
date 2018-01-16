@@ -36,10 +36,10 @@ class ContratsController extends Controller
         $voitures = null;
         $clients = null;
         if($client_id){
-            $voitures = Voiture::where('disponibilite', '=', 1)->get();
+            $voitures = Voiture::where('disponibilite', '=', 1)->get()->sortBy('immatriculation');
         } else {
-            $voitures = Voiture::where('disponibilite', '=', 1)->get();
-            $clients = Client::all();
+            $voitures = Voiture::where('disponibilite', '=', 1)->get()->sortBy('immatriculation');
+            $clients = Client::all()->sortBy('nom');
         }
 
         return view('contrats.create' ,['voitures' => $voitures , 'clients' => $clients, 'client_id'=>$client_id]);

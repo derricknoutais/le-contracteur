@@ -24,9 +24,10 @@ class DashboardController extends Controller
         $locationMensuelle  = Dashboard::locationMensuelle();
         $locationJournaliere  = Dashboard::locationJournaliere();
         $payementMensuel = Dashboard::totalPayement();
+        $nombreFacture = Dashboard::countLocation();
+        $averageDay = Dashboard::averageTime();
 
-
-        return view('dashboard.index', compact('tauxLocation', 'locationMensuelle', 'locationJournaliere', 'payementMensuel'));
+        return view('dashboard.index', compact('tauxLocation', 'locationMensuelle', 'locationJournaliere', 'payementMensuel', 'nombreFacture', 'averageDay'));
     }
 
     /**

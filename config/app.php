@@ -171,6 +171,7 @@ return [
          */
 
         Nexmo\Laravel\NexmoServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -234,6 +235,8 @@ return [
         'Carbon' => 'Carbon\Carbon',
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

@@ -9,6 +9,7 @@ use DB;
 use Charts;
 use DateTime;
 use DateInterval;
+use Carbon;
 class Dashboard extends Model
 {
     static public function tauxLocation(){
@@ -48,5 +49,22 @@ class Dashboard extends Model
     static public function totalPayement(){
         $today = getDate();
         return $payementTotal = Payement::whereMonth('created_at', $today['mon'])->sum('versement');
+    }
+    static public function countLocation(){
+        $today = getDate();
+        return $count = Contrat::whereMonth('created_at', $today['mon'])->count();
+    }
+    static public function averageTime(){
+        $today = getDate();
+
+        DB::table('contrats')->orderBy('id')->chunk(100, $avg = function ($contrats) {
+            $nombreJours = 0;
+            foreach($contrats as $contrat) {
+                 $nombreJours += (Carbon::parse($contrat->created_at))->diffInDays(Carbon::parse($contrat->date_retour_reelle));
+            }
+            return $nombreJours;
+        });
+        $total = Dashboard::countLocation();
+        return $nombre = $avg(Contrat::all())/$total;
     }
 }
