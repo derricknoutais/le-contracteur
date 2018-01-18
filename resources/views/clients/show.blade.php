@@ -46,11 +46,16 @@
                             foreach ($payements as $payement) {
                                 $sommeVersee += $payement->versement;
                             }
-                            if($contrat->date_retour_reelle == '1000-11-23 00:00:00' && $contrat->date_retour_prevue < Carbon\Carbon::now()  ){
-                                $total = ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays((Carbon\Carbon::now())->startOfDay());
+                            if($contrat->date_retour_reelle == '1000-11-23 00:00:00'){
+                                if($contrat->date_retour_prevue < Carbon\Carbon::now()){
+                                    $total = ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays((Carbon\Carbon::now())->startOfDay());
+                                } else {
+                                    $total = ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay());
+                                }
                             } else {
-                                $total = ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_prevue)->startOfDay());
+                                $total = ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_reelle)->startOfDay());
                             }
+
 
                             $totalFacture += $total;
                             $totalVersee += $sommeVersee;
