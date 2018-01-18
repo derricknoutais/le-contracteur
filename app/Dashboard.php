@@ -33,7 +33,7 @@ class Dashboard extends Model
     }
     static public function locationJournaliere(){
         $today = getDate();
-        $data = Contrat::all();
+        $data = Contrat::whereMonth('created_at', $today['mon'])->get();
         $chart = Charts::database($data, 'bar', 'highcharts')
             ->title("Nombre de Location Journaliere")
             ->responsive('true')
@@ -60,7 +60,11 @@ class Dashboard extends Model
         DB::table('contrats')->orderBy('id')->chunk(100, $avg = function ($contrats) {
             $nombreJours = 0;
             foreach($contrats as $contrat) {
-                 $nombreJours += (Carbon::parse($contrat->created_at))->diffInDays(Carbon::parse($contrat->date_retour_reelle));
+                if($contrat->date_retour_reelle != '1000-11-23 00:00:00'){
+                    $nombreJours += (Carbon::parse($contrat->created_at))->diffInDays(Carbon::parse($contrat->date_retour_reelle));
+                } else {
+                    $nombreJours += (Carbon::parse($contrat->created_at))->diffInDays(Carbon::now());
+                }
             }
             return $nombreJours;
         });

@@ -243,13 +243,10 @@
                  <li>
                     Le carburant est à la charge du client. La voiture est de type essence. L'utilisation de carburant autre que celle des stations de service entrainera un non-retrait de caution
                  </li>
-                 <li>
-                     Seul l
-                 </li>
              </ol>
              </div>
          </div>
-      <div class="row pad-top-botm">
+      {{-- <div class="row pad-top-botm">
          <div class="col-lg-12 col-md-12 col-sm-12">
              <hr />
              <a href="#" class="btn btn-primary btn-lg" >Print Invoice</a>
@@ -257,6 +254,6 @@
               <a href="#" class="btn btn-success btn-lg" >Download In Pdf</a>
 
              </div>
-         </div>
+         </div> --}}
  </div>
 @endsection
