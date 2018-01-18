@@ -3,7 +3,7 @@
 @section('content')
 <div class="span3 well">
     <center>
-        <a href="#product_view" data-toggle="modal" data-target="#product_view"><img src="https://avatars1.githubusercontent.com/u/11767240?v=3&s=400" name="aboutme" width="160" height="160" class="img-circle img-responsive"></a>
+        <a href="#product_view" data-toggle="modal" data-target="#product_view"><img src="{{ asset('images/user_img.png') }}" name="aboutme" width="160" height="160" class="img-circle img-responsive"></a>
         <h3>{{ $client->nom . " " . $client->prenom }}</h3>
         <h4>Caution: {{ number_format($client->caution) }} CFA</h4>
         <p><em>{{ $client->numero_phone  }} @if($client->numero_phone != "") / {{ $client->numero_phone2  }} @endif </em></p>
