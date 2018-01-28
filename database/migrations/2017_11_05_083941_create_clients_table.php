@@ -20,6 +20,7 @@ class CreateClientsTable extends Migration
             $table->date('date_naissance')->nullable();
             $table->string('addresse')->nullable();
             $table->string('ville');
+            $table->smallInteger('type');
             $table->string('numero_permis')->nullable();
             $table->string('numero_phone')->unique()->nullable();
             $table->string('numero_phone2')->unique()->nullable();

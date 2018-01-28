@@ -17,7 +17,6 @@ class CreatePayementsTable extends Migration
             $table->increments('id');
             $table->integer('contrat_id')->unsigned();
             $table->integer('versement');
-
             $table->foreign('contrat_id')->references('id')->on('contrats')->onDelete('cascade');
             $table->timestamps();
         });

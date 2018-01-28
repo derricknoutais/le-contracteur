@@ -5,13 +5,25 @@
     <h3>Nouveau Client</h3>
     <form action="{{ route('clients.store') }}" method="post" class="text-center" >
         {{ csrf_field() }}
-        <div class="form-group col-md-6" >
-            <label for="nom">Nom<span class="required">*</span></label>
-            <input id="nom" type="text" name="nom" class="form-control" spellcheck="false"  placeholder="Moubamba, Benzema, Talon" />
+        <div class="row">
+            <div class="form-group col-md-8 col-md-offset-2" >
+                <label for="type">Type de Client<span class="required">*</span></label>
+                <select id="type" type="text" name="type" class="form-control" spellcheck="false" required placeholder="Client" >
+                    <option value="0">Personnel</option>
+                    <option value="1" selected>Société</option>
+                </select>
+            </div>
         </div>
-        <div class="form-group col-md-6" >
-            <label for="prenom">Prenom<span class="required">*</span></label>
-            <input id="prenom" type="text" name="prenom" class="form-control" spellcheck="false"  placeholder="Bruno, Karim, Patrice" />
+
+        <div class="row">
+            <div class="form-group col-md-4 col-md-offset-2" >
+                <label for="nom">Nom<span class="required">*</span></label>
+                <input id="nom" type="text" name="nom" class="form-control" spellcheck="false"  placeholder="Moubamba, Benzema, Talon" />
+            </div>
+            <div class="form-group col-md-4" >
+                <label for="prenom">Prenom<span class="required">*</span></label>
+                <input id="prenom" type="text" name="prenom" class="form-control" spellcheck="false"  placeholder="Bruno, Karim, Patrice" />
+            </div>
         </div>
         <div class="form-group col-md-6" >
             <label for="addresse">Addresse<span class="required">*</span></label>

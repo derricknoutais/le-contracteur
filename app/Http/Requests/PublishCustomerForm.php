@@ -40,6 +40,7 @@ class PublishCustomerForm extends FormRequest
                 'prenom' => $this->input('prenom'),
                 'date_naissance' => $this->input('date_naissance'),
                 'addresse' => $this->input('addresse'),
+                'type' => $this->input('type'),
                 'ville' => $this->input('ville'),
                 'numero_permis' => $this->input('numero_permis'),
                 'numero_phone' => $this->input('numero_phone'),

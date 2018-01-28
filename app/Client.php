@@ -15,9 +15,11 @@ class Client extends Model
         'numero_permis',
         'numero_phone',
         'numero_phone2',
-        'email'
+        'email',
+        'type'
     ];
     public function contrats(){
         return $this->hasMany('App\Contract');
     }
+
 }
