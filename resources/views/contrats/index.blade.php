@@ -1,8 +1,7 @@
-
-
 @extends('layouts.app')
 
 @section('content')
+
 <h1 class="text-center text-primary">Liste de Contrats</h1>
 <div class="col-xs-12 col-md-12 col">
     <div class="panel panel-primary ">
@@ -160,7 +159,6 @@
                 </tr>
             </thead>
             <tbody>
-
                     @foreach($contratsArchivés as $contrat)
                     @php
                         {{

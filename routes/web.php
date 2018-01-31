@@ -1,5 +1,6 @@
 <?php
-
+use App\Voiture;
+use App\Mail\Welcome;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,12 +11,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/reservations', 'ReservationController@store');
+
+Route::get('/mail', function () {
+    $user = App\User::first();
+    $user->notify(new App\Notifications\VoitureReservee);
+});
 
 Route::get('/', function () {
-    if(Auth::check()){
-        return view('home');
-    }
-    return view('auth.login');
+        $voitures = Voiture::where('disponibilite', 1)->get()->sortBy('prix');
+        return view('home', compact('voitures'));
 });
 
 Auth::routes();

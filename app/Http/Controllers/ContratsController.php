@@ -6,6 +6,7 @@ use App\Contrat;
 use App\Voiture;
 use App\Client;
 use App\Payement;
+use Calendar;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -22,11 +23,25 @@ class ContratsController extends Controller
      */
     public function index()
     {
+        $c = Contrat::all();
         $contrats = Contrat::where('date_retour_reelle', '1000-11-23 00:00:00')->paginate(10);
         $contratsArchivés = Contrat::where('date_retour_reelle', '<>', '1000-11-23 00:00:00')->paginate(10);
-
-
-        return view('contrats.index', compact('contrats', 'contratsArchivés'));
+        $events = [];
+        foreach ($c as $contrat) {
+           $events[] = Calendar::event(
+                $contrat->id,
+                true,
+                new \DateTime($contrat->created_at),
+                new \DateTime($contrat->date_retour_prevue),
+                null,
+                [
+                        'color' => '#f05050',
+                        'url' => '/contrats/' . $contrat->id,
+                    ]
+            );
+        }
+        $calendar = Calendar::addEvents($events);
+        return view('contrats.index', compact('contrats', 'contratsArchivés', 'calendar'));
     }
 
     /**

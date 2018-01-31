@@ -172,6 +172,7 @@ return [
 
         Nexmo\Laravel\NexmoServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -182,6 +183,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+
 
 
     ],
@@ -237,6 +239,7 @@ return [
         'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
 
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 
     ],
 
