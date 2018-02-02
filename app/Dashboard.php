@@ -52,7 +52,11 @@ class Dashboard extends Model
     }
     static public function countLocation(){
         $today = getDate();
-        return $count = Contrat::whereMonth('created_at', $today['mon'])->count();
+        $count = Contrat::whereMonth('created_at', $today['mon'])->count();
+        if($count == 0){
+            return 1;
+        }
+        return $count;
     }
     static public function averageTime(){
         $today = getDate();
