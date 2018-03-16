@@ -24,8 +24,8 @@ class ContratsController extends Controller
     public function index()
     {
         $c = Contrat::all();
-        $contrats = Contrat::where('date_retour_reelle', '1000-11-23 00:00:00');
-        $contratsArchivés = Contrat::where('date_retour_reelle', '<>', '1000-11-23 00:00:00');
+        $contrats = Contrat::where('date_retour_reelle', '1000-11-23 00:00:00')->get();
+        $contratsArchivés = Contrat::where('date_retour_reelle', '<>', '1000-11-23 00:00:00')->get();
 
         return view('contrats.index', compact('contrats', 'contratsArchivés'));
     }
