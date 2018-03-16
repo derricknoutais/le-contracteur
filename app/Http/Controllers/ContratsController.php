@@ -26,22 +26,8 @@ class ContratsController extends Controller
         $c = Contrat::all();
         $contrats = Contrat::where('date_retour_reelle', '1000-11-23 00:00:00')->paginate(10);
         $contratsArchivés = Contrat::where('date_retour_reelle', '<>', '1000-11-23 00:00:00')->paginate(10);
-        $events = [];
-        foreach ($c as $contrat) {
-           $events[] = Calendar::event(
-                $contrat->id,
-                true,
-                new \DateTime($contrat->created_at),
-                new \DateTime($contrat->date_retour_prevue),
-                null,
-                [
-                        'color' => '#f05050',
-                        'url' => '/contrats/' . $contrat->id,
-                    ]
-            );
-        }
-        $calendar = Calendar::addEvents($events);
-        return view('contrats.index', compact('contrats', 'contratsArchivés', 'calendar'));
+
+        return view('contrats.index', compact('contrats', 'contratsArchivés'));
     }
 
     /**
