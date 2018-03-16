@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                     @foreach($contrats as $contrat)
-                        @php{{
+                        @php
                             Carbon::setlocale(LC_TIME, 'fr');
                             $payements = \App\Payement::where('contrat_id', $contrat->id)->get();
                             $sommeVersee =0;
@@ -45,7 +45,7 @@
                                     $balance = $sommeVersee - ($contrat->voiture->prix - $contrat->remise) * (($contrat->created_at)->startOfDay())->diffInDays(($contrat->date_retour_reelle)->startOfDay());
                                 }
                             }
-                        }}@endphp
+                        @endphp
 
 
                     @endforeach
