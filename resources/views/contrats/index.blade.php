@@ -24,7 +24,11 @@
                 </thead>
                 <tbody>
                     @foreach($contrats as $contrat)
-
+                        @php
+                            {{
+                                $balance = 0;
+                            }}
+                        @endphp
 
                         <tr
                         @if( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' &&
