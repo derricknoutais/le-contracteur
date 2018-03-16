@@ -79,7 +79,7 @@
                                     {{ Carbon::parse(($contrat->date_retour_prevue)->format('d-m-Y H:i:s'))->diffForHumans() }}
                                 @endif
                             </td>
-                            <td>{{ number_format($balance) }}</td>
+                            <td>{{ $contrat->voiture->prix }}</td>
                             <td>
                                 @if ($balance < 0)
                                 <a  class="btn btn-primary btn-sm" href="/payements/create/{{ $contrat->id }}">Créer un payement</a>
