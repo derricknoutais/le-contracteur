@@ -23,11 +23,11 @@ class ContratsController extends Controller
      */
     public function index()
     {
-        return $c = Contrat::all();
-        //$contrats = Contrat::where('date_retour_reelle', '1000-11-23 00:00:00')->paginate(10);
-        //$contratsArchivés = Contrat::where('date_retour_reelle', '<>', '1000-11-23 00:00:00')->paginate(10);
+        $c = Contrat::all();
+        $contrats = Contrat::where('date_retour_reelle', '1000-11-23 00:00:00');
+        $contratsArchivés = Contrat::where('date_retour_reelle', '<>', '1000-11-23 00:00:00');
 
-        //return view('contrats.index', compact('contrats', 'contratsArchivés'));
+        return view('contrats.index', compact('contrats', 'contratsArchivés'));
     }
 
     /**
