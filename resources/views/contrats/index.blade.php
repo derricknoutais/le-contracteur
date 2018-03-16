@@ -9,30 +9,23 @@
             contrats
             <a href="/contrats/create" class="pull-right btn btn-primary btn-sm">Create New</a>
         </div>
-
         <div class="panel-body">
             <table class="table table-hover">
-            <thead>
-                <h3 class="text-center">Contrats En Cours</h3>
-                <tr>
-                  <th>Facture Nº</th>
-                  <th>Nom &amp; Prénom</th>
-                  <th>Immatriculation</th>
-                  <th>Date de Retour</th>
-                  <th>Balance</th>
-                </tr>
-            </thead>
-            <tbody>
-
-
-
-
-                </tr>
-                </a>
-                @endforeach
-              </tbody>
+                <thead>
+                    <h3 class="text-center">Contrats En Cours</h3>
+                    <tr>
+                      <th>Facture Nº</th>
+                      <th>Nom &amp; Prénom</th>
+                      <th>Immatriculation</th>
+                      <th>Date de Retour</th>
+                      <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tr>
+                    </a>
+                </tbody>
             </table>
-
         </div>
     </div>
 </div>
