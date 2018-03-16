@@ -25,6 +25,71 @@
                 <tbody>
                     @foreach($contrats as $contrat)
 
+
+                        <tr
+                        @if( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' &&
+                                ($balance >= 0) )
+                           class="bg-warning"
+                        @elseif( ($contrat->date_retour_reelle)->format('Y-m-d') != '1000-11-23' &&
+                                ($balance >= 0) )
+                            class="bg-success"
+                        @elseif( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' &&
+                                ($balance < 0) )
+                            class="bg-danger"
+                        @endif
+                        >
+                            <th scope="row"><a href="contrats/{{ $contrat->id }}">00{{ $contrat->id }}</a></th>
+                            <td>
+                                <a href="clients/{{ $contrat->client->id }}" title="">
+                                    {{ $contrat->client->nom }} {{ $contrat->client->prenom }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="voitures/{{ $contrat->voiture->id }}" title="">
+                                    {{ $contrat->voiture->immatriculation }}
+                                </a>
+                            </td>
+
+                            <td>
+                                @if( ($contrat->date_retour_reelle)->format('Y-m-d') != '1000-11-23' )
+                                    Retourné
+                                @else
+                                    {{ Carbon::parse(($contrat->date_retour_prevue)->format('d-m-Y H:i:s'))->diffForHumans() }}
+                                @endif
+                            </td>
+                            <td>{{ number_format($balance) }}</td>
+                            <td>
+                                @if ($balance < 0)
+                                <a  class="btn btn-primary btn-sm" href="/payements/create/{{ $contrat->id }}">Créer un payement</a>
+                                @endif
+
+                                @if( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23' )
+                                <a href="/contrats/{{ $contrat->id }}/edit" class="btn btn-primary btn-sm">Editer</a>
+                                @endif
+
+                                {{-- <a href="#" type="button" class="btn btn-primary btn-sm" onclick="var result = confirm('Etes vous sur de vouloir supprimer un client?');
+                                    if(result){
+                                        event.preventDefault();
+                                        document.getElementById('delete-form').submit();
+                                    }" >Supprimer</a>
+                                    <form id="delete-form" action="{{ route('contrats.destroy' , [$contrat->id]) }}" method="POST" style="display: none;">
+                                            <input type="hidden" name="_method" value="delete">
+                                            {{ csrf_field() }}
+                                    </form> --}}
+                                    @if( ($contrat->date_retour_reelle)->format('Y-m-d') == '1000-11-23')
+                                    <a type="button" class="btn btn-primary btn-sm" href="/contrats/edit/{{ $contrat->id }}">Retourner</a>
+                                    @endif
+                               <form id="retour-form" action="{{ route('contrats.update' , [$contrat->id]) }}" method="POST" style="display: none;">
+                                       <input type="hidden" name="_method" value="put">
+                                       {{ csrf_field() }}
+                                       <input type="date" name="date_retour_reelle" value="{{ Carbon::now()->format('Y-m-d')  }}">
+                                       <input type="text" name="client_id" value="{{ $contrat->id }}">
+                                       <input type="date" name="date_retour_prevue" value="{{ ($contrat->date_retour_prevue)->format('Y-m-d') }}">
+                                       <input type="" name="caution" value="{{ $contrat->caution }}">
+                                       <input type="submit" name="">
+                               </form>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
