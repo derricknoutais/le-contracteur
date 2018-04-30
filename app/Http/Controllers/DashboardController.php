@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dashboard;
-use Illuminate\Http\Request;
+use Illuminate\Hbottp\Request;
 use Charts;
 use App\User;
 use App\Role;

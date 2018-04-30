@@ -1,137 +1,32 @@
-{{-- @auth
-@extends('layouts.app')
-
-@section('content')
-<div class="container-fluid">
-    <div class="row text-center">
-        @auth()
-            <h1>Bienvenue {{ Auth::user()->first_name . " " . Auth::user()->last_name }} STA-Contracteur </h1>
-        @else
-            <h1>Services Tous Azimuts - Port-Gentil</h1>
-            <small>Notre Slogan</small>
-        @endauth
-    @auth()
-    </div>
-    <div class="row ">
-        <div class="col-md-12">
-            <div id="carousel-example-generic" class="carousel slide bg-primary" data-ride="carousel" data-interval="3000">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-          </ol>
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" role="listbox" >
-            <div class="item active">
-              <img src="https://di-uploads-pod3.dealerinspire.com/beavertoyotastaugustine/uploads/2017/11/cc_2018TOS110002_01_2100_1D6-1024x768.png" alt="...">
-              <div class="carousel-caption">
-                <h1>Le meilleur de la voiture</h1>
-              </div>
-            </div>
-            <div class="item">
-              <img src="http://www.cars2let.com/wp-content/uploads/2015/10/step3.png" alt="...">
-              <div class="carousel-caption">
-                ...
-              </div>
-            </div>
-            <div class="item">
-              <img src="https://www.salemdist.com/sites/default/files/diamondtools4.png" alt="...">
-              <div class="carousel-caption">
-                ...
-              </div>
-            </div>
-          </div>
-
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-        </div>
-    @endauth
-    </div>
-    <div class="col-md-8 col-md-push-2">
-        <form action="" method="">
-            <div class="form-group col-md-6" >
-                <label for="nom">Nom<span class="required">*</span></label>
-                <input id="nom" type="text" name="nom" class="form-control" spellcheck="false"  placeholder="Moubamba, Benzema, Talon" />
-            </div>
-            <div class="form-group col-md-6" >
-                <label for="prenom">Prenom<span class="required">*</span></label>
-                <input id="prenom" type="text" name="prenom" class="form-control" spellcheck="false"  placeholder="Bruno, Karim, Patrice" />
-            </div>
-        <div class="form-group">
-            @if($voitures != null )
-            <div class="form-group col-md-12" >
-                <label for="voiture_id">Choisissez la voiture<span class="required">*</span></label>
-                <select id="voiture_id" type="text" name="voiture_id" class="form-control" spellcheck="false" required>
-                    @forelse($voitures as $voiture)
-                    <option selected value="{{ $voiture->id }}"> {{ $voiture->immatriculation }} </option>
-                    @empty
-                    <option selected disabled value=""> Aucune voiture dispo</option>
-                    @endforelse
-                </select>
-            </div>
-            @endif
-        </div>
-        <div class="form-group col-md-6">
-            <label for="jourDu">Du:</label>
-            <input type="date" name="jourDu" class="form-control">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="jourAu" >Au:</label>
-            <input type="date" name="jourAu" class="form-control">
-        </div>
-        <div class="form-group col-md-1 col-md-push-5">
-            <input type="submit" value="Réservez" class="btn btn-primary">
-        </div>
-    </form>
-    </div>
-</div>
-@endsection
-@else
-    @include('partials.visitorH')
-    @endauth --}}
-
-    <!DOCTYPE html>
-    <html lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    	<meta charset="utf-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    	<meta name="description" content="">
-    	<meta name="author" content="">
+	<title></title>
 
-    	<title></title>
+	<!-- Bootstrap core CSS -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    	<!-- Bootstrap core CSS -->
-    	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom fonts for this template -->
+	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-    	<!-- Custom fonts for this template -->
-    	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    	<link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-    	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-    	<!-- Custom styles for this template -->
-    	<link href="css/landing-page.css" rel="stylesheet">
-    	<style>
-	    	#map {
-	    		height: 400px;
-	    		width: 100%;
-	    	}
-    	</style>
-</head>
+	<!-- Custom styles for this template -->
+	<link href="css/landing-page.css" rel="stylesheet">
+	<style>
+    	#map {
+    		height: 400px;
+    		width: 100%;
+    	}
+	</style>
+	</head>
 
 <body>
-
 	<!-- Navigation -->
 	<nav class="navbar navbar-light  navbar-static-top navbar-expand-md">
 		<div class="container">
@@ -139,11 +34,9 @@
 			<button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
 			data-target="#app-navbar-collapse" aria-expanded="false"><span class="sr-only">Toggle Navigation</span>
 			</button>
-        <!-- Branding Image -->
+        	<!-- Branding Image -->
         	<a class="navbar-brand" href="{{ url('/') }}" style="margin-bottom: 0.5em;">
-
         		<img src="/images/logo.png" style="padding-top:20px; width:2em;">
-
         	</a>
         	<div class="collapse navbar-collapse" id="app-navbar-collapse"
         	style="padding-top:0.5em;">
