@@ -25,14 +25,15 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::middleware(['auth'])->group(function(){
-    Route::get('/contrats/create/', 'ContratsController@create');
-    Route::get('/contrats/create/{voiture_id}', 'ContratsController@create2');
-    Route::get('/contrats/{client_id}/create', 'ContratsController@create');
-    Route::resource('contrats', 'ContratsController');
+    Route::get('/hi/create/', 'ContratsController@create');
+    Route::get('/hi/create/{voiture_id}', 'ContratsController@create2');
+    Route::get('/hi/{client_id}/create', 'ContratsController@create');
+    Route::get('/hi', 'ContratsController@index');
+    Route::resource('hi', 'ContratsController');
 
-    Route::get('/contrats/edit/{contrat}', 'ContratsController@edit2');
+    Route::get('/hi/edit/{contrat}', 'ContratsController@edit2');
 
-    Route::put('/contrats/retourner/{id}', 'ContratsController@retourner')->name('contrats.retourner');
+    Route::put('/hi/retourner/{id}', 'ContratsController@retourner')->name('hi.retourner');
 
 
     Route::resource('voitures', 'VoituresController');
